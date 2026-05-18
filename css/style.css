@@ -230,7 +230,16 @@ body {
 
 /* ── Card grid ───────────────────────────────────── */
 #cards-view { display: block; }
-#map-view   { display: none; }
+/* Hide map-view via clip instead of display:none so Leaflet can always
+   measure the container correctly. Switched in JS via .hidden class. */
+#map-view.hidden {
+  position: absolute !important;
+  left: -99999px;
+  top: 0;
+  width: calc(100vw - 4rem);
+  max-width: 1100px;
+  pointer-events: none;
+}
 
 #card-grid {
   display: grid;
