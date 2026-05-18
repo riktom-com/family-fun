@@ -1233,7 +1233,11 @@ function switchView(mode) {
   $('map-view-btn').classList.toggle('active', mode === 'map');
   $('cards-view').style.display = mode === 'list' ? 'block' : 'none';
   $('map-view').style.display  = mode === 'map'  ? 'block' : 'none';
-  if (mode === 'map') renderMap(filteredAndSorted());
+  if (mode === 'map') {
+    // Use requestAnimationFrame so the browser fully reflows the now-visible
+    // container before Leaflet measures it — otherwise Leaflet sees 0×0 px.
+    requestAnimationFrame(() => renderMap(filteredAndSorted()));
+  }
 }
 
 function clearAllFilters() {

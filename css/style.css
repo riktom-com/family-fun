@@ -358,7 +358,7 @@ body {
 #map-view {
   border-radius: var(--radius);
   border: 1.5px solid var(--border);
-  overflow: hidden;  /* border-radius clip lives on the wrapper, not the map */
+  /* No overflow:hidden — it clips Leaflet's absolutely-positioned tile layers */
 }
 #map-container {
   height: 520px;
