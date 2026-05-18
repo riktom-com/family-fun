@@ -355,11 +355,15 @@ body {
 .link-maps:hover { background: #ffe0b2; }
 
 /* ── Map view ────────────────────────────────────── */
-#map-container {
-  height: 520px;
+#map-view {
   border-radius: var(--radius);
   border: 1.5px solid var(--border);
-  overflow: hidden;
+  overflow: hidden;  /* border-radius clip lives on the wrapper, not the map */
+}
+#map-container {
+  height: 520px;
+  /* Do NOT set overflow:hidden or border-radius directly on the Leaflet
+     container — it clips tile layers and breaks rendering. */
 }
 
 /* ── No results ──────────────────────────────────── */

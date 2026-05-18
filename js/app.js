@@ -1570,9 +1570,10 @@ function renderMap(list) {
     leafletMarkers.push(marker);
   });
 
-  // Invalidate size after container becomes visible — 100ms is too fast for display:none → block
-  setTimeout(() => leafletMap.invalidateSize(), 250);
-  setTimeout(() => leafletMap.invalidateSize(), 500);
+  // Force Leaflet to re-measure after the container becomes visible
+  setTimeout(() => leafletMap.invalidateSize(), 50);
+  setTimeout(() => leafletMap.invalidateSize(), 300);
+  setTimeout(() => leafletMap.invalidateSize(), 800);
 }
 
 /* ═══════════════════════════════════════════════════
