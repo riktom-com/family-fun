@@ -1,0 +1,428 @@
+/* Family Fun Finder — css/style.css ?v=1 */
+
+:root {
+  --orange:    #f57c00;
+  --orange-lt: #fff3e0;
+  --teal:      #00796b;
+  --teal-lt:   #e0f2f1;
+  --bg:        #fafafa;
+  --card-bg:   #ffffff;
+  --text:      #212121;
+  --muted:     #757575;
+  --border:    #e0e0e0;
+  --radius:    14px;
+
+  /* category badge colors */
+  --cat-park:    #388e3c;
+  --cat-museum:  #7b1fa2;
+  --cat-indoor:  #1565c0;
+  --cat-nature:  #2e7d32;
+  --cat-dining:  #e65100;
+  --cat-festival:#c62828;
+  --cat-class:   #00838f;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Header ─────────────────────────────────────── */
+#app-header {
+  background: linear-gradient(135deg, #fff3e0 0%, #e0f2f1 100%);
+  padding: 1.5rem 1.25rem 1rem;
+  border-bottom: 2px solid var(--border);
+}
+
+#app-header h1 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 900;
+  color: var(--orange);
+  letter-spacing: -0.5px;
+}
+
+#app-header .tagline {
+  color: var(--muted);
+  font-size: 1rem;
+  margin: .2rem 0 1rem;
+}
+
+.city-row {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  flex-wrap: wrap;
+}
+
+#city-select {
+  flex: 1;
+  min-width: 200px;
+  max-width: 320px;
+  padding: .55rem .75rem;
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  font-size: 1rem;
+  background: #fff;
+  color: var(--text);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%23757575' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right .6rem center;
+  padding-right: 2rem;
+  transition: border-color .15s;
+}
+#city-select:focus { outline: none; border-color: var(--orange); }
+
+#gps-btn {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .55rem .9rem;
+  background: var(--teal);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: .9rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .15s, transform .1s;
+}
+#gps-btn:hover { background: #00695c; }
+#gps-btn:active { transform: scale(.97); }
+#gps-btn svg { width: 16px; height: 16px; fill: #fff; }
+
+/* ── Filter bar ──────────────────────────────────── */
+#filter-bar {
+  background: #fff;
+  border-bottom: 1px solid var(--border);
+  padding: .75rem 1.25rem;
+  position: sticky;
+  top: 52px; /* below rk-nav */
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: .6rem;
+}
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: .75rem;
+  font-weight: 700;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  white-space: nowrap;
+  min-width: 50px;
+}
+
+/* Chips */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: .25rem;
+  padding: .3rem .7rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  font-size: .82rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background .12s, border-color .12s, color .12s;
+  user-select: none;
+}
+.chip:hover { border-color: var(--orange); color: var(--orange); }
+.chip.active {
+  background: var(--orange);
+  border-color: var(--orange);
+  color: #fff;
+}
+.chip.toggle-chip { border-style: dashed; }
+.chip.toggle-chip.active {
+  background: #e65100;
+  border-color: #e65100;
+  color: #fff;
+  border-style: solid;
+}
+
+/* Category chips scroll on mobile */
+.filter-row.cats {
+  overflow-x: auto;
+  flex-wrap: nowrap;
+  padding-bottom: .2rem;
+  scrollbar-width: none;
+}
+.filter-row.cats::-webkit-scrollbar { display: none; }
+
+/* ── Weather banner ──────────────────────────────── */
+#weather-banner {
+  display: none;
+  padding: .7rem 1.25rem;
+  font-size: .95rem;
+  font-weight: 600;
+  align-items: center;
+  gap: .5rem;
+}
+#weather-banner.show { display: flex; }
+#weather-banner.green  { background: #e8f5e9; color: #1b5e20; border-bottom: 2px solid #a5d6a7; }
+#weather-banner.orange { background: #fff3e0; color: #e65100; border-bottom: 2px solid #ffcc80; }
+#weather-banner.yellow { background: #fffde7; color: #f57f17; border-bottom: 2px solid #fff176; }
+#weather-banner.neutral{ background: #e3f2fd; color: #0d47a1; border-bottom: 2px solid #90caf9; }
+
+/* ── Main content ────────────────────────────────── */
+#main {
+  flex: 1;
+  padding: 1.25rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Results header */
+#results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+#results-count {
+  font-size: .95rem;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+#view-toggle {
+  display: flex;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+.view-btn {
+  padding: .4rem .8rem;
+  background: #fff;
+  border: none;
+  font-size: .85rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: var(--muted);
+  transition: background .12s, color .12s;
+}
+.view-btn.active { background: var(--orange); color: #fff; }
+
+/* ── Card grid ───────────────────────────────────── */
+#cards-view { display: block; }
+#map-view   { display: none; }
+
+#card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.activity-card {
+  background: var(--card-bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  cursor: pointer;
+  transition: box-shadow .15s, transform .15s;
+}
+.activity-card:hover {
+  box-shadow: 0 6px 20px rgba(0,0,0,.1);
+  transform: translateY(-2px);
+}
+.activity-card.expanded { border-color: var(--orange); }
+
+.card-top {
+  display: flex;
+  align-items: flex-start;
+  gap: .6rem;
+}
+.card-icon { font-size: 1.6rem; flex-shrink: 0; }
+.card-title-block { flex: 1; }
+.card-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1.3;
+}
+
+.card-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .3rem;
+  margin-top: .3rem;
+}
+
+.badge {
+  font-size: .7rem;
+  font-weight: 700;
+  padding: .15rem .45rem;
+  border-radius: 999px;
+  text-transform: uppercase;
+  letter-spacing: .3px;
+  white-space: nowrap;
+}
+.badge-cat-park     { background: #e8f5e9; color: var(--cat-park); }
+.badge-cat-museum   { background: #f3e5f5; color: var(--cat-museum); }
+.badge-cat-indoor-play { background: #e3f2fd; color: var(--cat-indoor); }
+.badge-cat-nature   { background: #e8f5e9; color: var(--cat-nature); }
+.badge-cat-dining   { background: #fbe9e7; color: var(--cat-dining); }
+.badge-cat-festival { background: #ffebee; color: var(--cat-festival); }
+.badge-cat-class    { background: #e0f7fa; color: var(--cat-class); }
+.badge-free  { background: #e8f5e9; color: #2e7d32; }
+.badge-paid  { background: #fff3e0; color: #e65100; }
+.badge-indoor  { background: #e3f2fd; color: #1565c0; }
+.badge-outdoor { background: #e8f5e9; color: #2e7d32; }
+.badge-both    { background: #f3e5f5; color: #6a1b9a; }
+.badge-age     { background: #fafafa; color: var(--muted); border: 1px solid var(--border); }
+.badge-dur     { background: #fafafa; color: var(--muted); border: 1px solid var(--border); }
+
+.card-desc-short {
+  font-size: .87rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+
+.card-expand-btn {
+  align-self: flex-start;
+  margin-top: .25rem;
+  padding: .3rem .75rem;
+  background: var(--orange-lt);
+  color: var(--orange);
+  border: 1.5px solid #ffcc80;
+  border-radius: 8px;
+  font-size: .82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .12s;
+}
+.card-expand-btn:hover { background: #ffe0b2; }
+
+.card-detail {
+  display: none;
+  flex-direction: column;
+  gap: .4rem;
+  padding-top: .5rem;
+  border-top: 1px solid var(--border);
+  font-size: .88rem;
+}
+.card-detail.show { display: flex; }
+.card-detail p { color: var(--text); }
+.card-detail .detail-label { font-weight: 700; color: var(--muted); font-size: .75rem; text-transform: uppercase; }
+.card-links {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  margin-top: .25rem;
+}
+.card-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: .3rem;
+  padding: .3rem .65rem;
+  border-radius: 8px;
+  font-size: .82rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .12s;
+}
+.link-website { background: var(--teal-lt); color: var(--teal); }
+.link-website:hover { background: #b2dfdb; }
+.link-maps    { background: var(--orange-lt); color: var(--orange); }
+.link-maps:hover { background: #ffe0b2; }
+
+/* ── Map view ────────────────────────────────────── */
+#map-container {
+  height: 520px;
+  border-radius: var(--radius);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+
+/* ── No results ──────────────────────────────────── */
+#no-results {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1rem;
+  gap: .75rem;
+}
+#no-results .no-icon { font-size: 3rem; }
+#no-results h3 { font-size: 1.2rem; color: var(--text); }
+#no-results p  { color: var(--muted); font-size: .95rem; max-width: 380px; }
+#no-results button {
+  margin-top: .5rem;
+  padding: .5rem 1.25rem;
+  background: var(--orange);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: .9rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* ── Footer ──────────────────────────────────────── */
+footer {
+  background: #212121;
+  color: #bdbdbd;
+  text-align: center;
+  padding: 1.5rem 1.25rem;
+  font-size: .88rem;
+  line-height: 1.8;
+  margin-top: auto;
+}
+footer a { color: #a5d6a7; text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* ── Loading spinner ─────────────────────────────── */
+#weather-loading {
+  display: none;
+  align-items: center;
+  gap: .5rem;
+  padding: .5rem 1.25rem;
+  color: var(--muted);
+  font-size: .88rem;
+}
+#weather-loading.show { display: flex; }
+.spinner {
+  width: 16px; height: 16px;
+  border: 2px solid var(--border);
+  border-top-color: var(--orange);
+  border-radius: 50%;
+  animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── Responsive ──────────────────────────────────── */
+@media (max-width: 600px) {
+  #app-header { padding: 1rem; }
+  #main { padding: .75rem; }
+  #filter-bar { padding: .5rem .75rem; top: 52px; }
+  #card-grid { grid-template-columns: 1fr; }
+  #map-container { height: 380px; }
+}

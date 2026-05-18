@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Fun Finder — Georgia Family Activities | riktom.com</title>
+  <meta name="description" content="Find the best things to do with your kids in Georgia — ranked by weather, age, and budget. Free, updated daily with NWS weather data.">
+  <meta property="og:title" content="Family Fun Finder — Georgia Family Activities">
+  <meta property="og:description" content="Pick a Georgia city, set your family's age and budget, and get smart activity recommendations updated with live weather.">
+  <meta property="og:url" content="https://family.riktom.com">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://family.riktom.com">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-5J1FM18QT4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-5J1FM18QT4');
+  </script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2646745084546998" crossorigin="anonymous"></script>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous">
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="css/style.css?v=1">
+</head>
+<body>
+
+<!-- rk-nav:start -->
+<style>
+.rk-nav{background:#1b5e20;padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;min-height:52px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;position:sticky;top:0;z-index:1000;box-sizing:border-box;}
+.rk-nav *{box-sizing:border-box;}
+.rk-nav .rk-logo{font-size:1.4rem;font-weight:900;color:#fff;text-decoration:none;letter-spacing:-0.5px;white-space:nowrap;}
+.rk-nav .rk-logo span{color:#a5d6a7;}
+.rk-nav ul{list-style:none;display:flex;align-items:center;gap:.25rem;flex-wrap:wrap;margin:0;padding:0;}
+.rk-nav ul li{margin:0;}
+.rk-nav ul li a{color:#c8e6c9;text-decoration:none;font-size:.9rem;padding:.4rem .6rem;border-radius:6px;white-space:nowrap;transition:background .15s;display:inline-block;}
+.rk-nav ul li a:hover{background:rgba(255,255,255,.12);color:#fff;}
+.rk-dd{position:relative;}
+.rk-dd-menu{display:none;position:absolute;top:100%;right:0;background:#fff;border:1px solid #e0e0e0;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.15);min-width:210px;padding:.4rem 0;z-index:2000;}
+.rk-dd:hover .rk-dd-menu,.rk-dd:focus-within .rk-dd-menu{display:block;}
+.rk-dd-menu a{display:flex!important;align-items:center;gap:.5rem;padding:.55rem 1rem!important;color:#212121!important;font-size:.9rem;background:none!important;border-radius:0!important;}
+.rk-dd-menu a:hover{background:#f5f5f5!important;color:#212121!important;}
+.rk-suggest{color:#fff!important;font-weight:600!important;}
+.rk-home{background:#fff!important;color:#1b5e20!important;font-weight:700!important;padding:.4rem .85rem!important;border-radius:6px!important;}
+.rk-home:hover{background:#e8f5e9!important;color:#1b5e20!important;}
+@media (max-width:700px){.rk-nav ul{gap:.1rem;}.rk-nav ul li a{font-size:.78rem;padding:.3rem .45rem;}.rk-nav .rk-logo{font-size:1.15rem;}.rk-dd-menu{right:auto;left:0;}}
+</style>
+<nav class="rk-nav">
+  <a href="https://riktom.com" class="rk-logo">rik<span>tom</span>.com</a>
+  <ul>
+    <li><a href="https://riktom.com/about.html">About</a></li>
+    <li><a href="https://riktom.com/articles/">Blog</a></li>
+    <li class="rk-dd">
+      <a href="https://riktom.com/#apps">Apps ▾</a>
+      <div class="rk-dd-menu">
+        <a href="https://river.riktom.com"><span>🎣</span> RiverWatch</a>
+        <a href="https://fire.riktom.com"><span>🔥</span> Fire Watcher</a>
+        <a href="https://forecast.riktom.com"><span>🌤️</span> Hunt &amp; Fish Forecast</a>
+        <a href="https://hunt.riktom.com"><span>🦌</span> Hunting Tracker</a>
+        <a href="https://trucks.riktom.com"><span>🚛</span> Truck Finder</a>
+        <a href="https://burn.riktom.com"><span>🔥</span> Burn Permit</a>
+        <a href="https://ramps.riktom.com"><span>⚓</span> Ramp Radar</a>
+        <a href="https://tips.riktom.com"><span>⛺</span> Field Reports</a>
+        <a href="https://deer.riktom.com"><span>🦌</span> Deer Radar</a>
+        <a href="https://dash.riktom.com"><span>🎯</span> Trip Planner</a>
+        <a href="https://sky.riktom.com"><span>🌌</span> Night Sky</a>
+        <a href="https://family.riktom.com"><span>👨‍👩‍👧</span> Family Fun Finder</a>
+      </div>
+    </li>
+    <li><a href="https://riktom.com/suggest.html" class="rk-suggest">💡 Suggest an Idea</a></li>
+    <li><a href="https://riktom.com" class="rk-home">🏠 Home</a></li>
+  </ul>
+</nav>
+<!-- rk-nav:end -->
+
+<!-- ── App Header ─────────────────────────────────── -->
+<header id="app-header">
+  <h1>👨‍👩‍👧 Family Fun Finder</h1>
+  <p class="tagline">Find the perfect outing for your family — anywhere in Georgia</p>
+  <div class="city-row">
+    <select id="city-select" aria-label="Select a Georgia city or region"></select>
+    <button id="gps-btn" aria-label="Use my current location">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      📍 Use My Location
+    </button>
+  </div>
+</header>
+
+<!-- ── Filter Bar ─────────────────────────────────── -->
+<section id="filter-bar" aria-label="Activity filters">
+  <!-- Age -->
+  <div class="filter-row" role="group" aria-label="Age filter">
+    <span class="filter-label">Age</span>
+    <div id="age-chips" style="display:flex;gap:.4rem;flex-wrap:wrap;"></div>
+  </div>
+
+  <!-- Setting + Cost -->
+  <div class="filter-row" role="group" aria-label="Setting and cost filters">
+    <span class="filter-label">Setting</span>
+    <div id="setting-chips" style="display:flex;gap:.4rem;flex-wrap:wrap;"></div>
+    <span class="filter-label" style="margin-left:.5rem;">Cost</span>
+    <div id="cost-chips" style="display:flex;gap:.4rem;flex-wrap:wrap;"></div>
+  </div>
+
+  <!-- Category (scrollable on mobile) -->
+  <div class="filter-row cats" role="group" aria-label="Category filter">
+    <span class="filter-label">Type</span>
+    <div id="cat-chips" style="display:flex;gap:.4rem;"></div>
+  </div>
+
+  <!-- Toggles -->
+  <div class="filter-row" role="group" aria-label="Special filters">
+    <span class="filter-label">Extra</span>
+    <button id="rainy-toggle"   class="chip toggle-chip" aria-pressed="false">☔ Rainy Day Picks</button>
+    <button id="stroller-toggle" class="chip toggle-chip" aria-pressed="false">🧑‍🦽 Stroller Friendly</button>
+  </div>
+</section>
+
+<!-- ── Weather banner ─────────────────────────────── -->
+<div id="weather-loading" role="status" aria-live="polite">
+  <div class="spinner" aria-hidden="true"></div>
+  Fetching today's weather…
+</div>
+<div id="weather-banner" role="alert" aria-live="polite"></div>
+
+<!-- ── Main ───────────────────────────────────────── -->
+<main id="main">
+  <div id="results-header">
+    <span id="results-count" aria-live="polite" aria-atomic="true"></span>
+    <div id="view-toggle" role="group" aria-label="View mode">
+      <button id="list-view-btn" class="view-btn active" aria-pressed="true">☰ List</button>
+      <button id="map-view-btn"  class="view-btn" aria-pressed="false">🗺️ Map</button>
+    </div>
+  </div>
+
+  <!-- Card grid -->
+  <div id="cards-view">
+    <div id="card-grid" role="list" aria-label="Activity results"></div>
+  </div>
+
+  <!-- Map view -->
+  <div id="map-view">
+    <div id="map-container"></div>
+  </div>
+
+  <!-- No results -->
+  <div id="no-results" role="status" aria-live="polite">
+    <span class="no-icon">🔍</span>
+    <h3>No activities match your filters</h3>
+    <p>Try widening your age range, removing the cost restriction, or selecting a different city.</p>
+    <button id="clear-filters-btn">Clear All Filters</button>
+  </div>
+</main>
+
+<!-- ── Footer ─────────────────────────────────────── -->
+<footer>
+  <p>Family Fun Finder is part of <a href="https://riktom.com">riktom.com</a> — free tools for Georgia families and outdoorspeople.</p>
+  <p><a href="https://riktom.com/privacy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="https://riktom.com/suggest.html">Suggest an Activity</a></p>
+  <p>&copy; 2026 riktom.com — Hahira, Georgia</p>
+</footer>
+
+<!-- Leaflet JS -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/sp38=" crossorigin="anonymous"></script>
+
+<!-- App JS -->
+<script src="js/app.js?v=1"></script>
+
+</body>
+</html>
