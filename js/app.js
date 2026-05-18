@@ -1232,14 +1232,15 @@ function switchView(mode) {
   $('list-view-btn').classList.toggle('active', mode === 'list');
   $('map-view-btn').classList.toggle('active', mode === 'map');
   $('cards-view').style.display = mode === 'list' ? 'block' : 'none';
-  // Toggle .hidden (off-screen) instead of display:none — keeps map measurable
-  $('map-view').classList.toggle('hidden', mode !== 'map');
+  $('map-view').classList.toggle('active', mode === 'map');
+
   if (mode === 'map') {
+    const mapView = $('map-view');
+    // Force synchronous layout — reading offsetHeight makes the browser
+    // compute layout NOW, so the container has real dimensions before
+    // we initialize or measure Leaflet.
+    void mapView.offsetHeight;
     renderMap(filteredAndSorted());
-    // After bringing it on-screen, force re-measure
-    if (leafletMap) {
-      requestAnimationFrame(() => leafletMap.invalidateSize());
-    }
   }
 }
 
@@ -1437,13 +1438,6 @@ function renderResults() {
   }
 
   if (state.viewMode === 'map') renderMap(results);
-
-  // Eagerly initialize the map on first results render. The container is
-  // off-screen via .hidden but fully measurable thanks to position:absolute
-  // + explicit width, so Leaflet can size correctly right away.
-  if (!leafletMap) {
-    renderMap(results);
-  }
 }
 
 const CATEGORY_ICONS = {
